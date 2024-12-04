@@ -35,4 +35,4 @@ jobs:
       - name: run
         run: |
           cd wa1
-          node ghact.js
+          pm2-runtime index.js
