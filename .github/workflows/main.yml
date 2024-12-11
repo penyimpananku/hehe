@@ -21,7 +21,9 @@ jobs:
           node-version: '20'  
 
       - name: apt
-        run: sudo apt-get install -y ffmpeg neofetch
+        run: |
+          sudo apt update
+          sudo apt install -y ffmpeg neofetch
 
       - name: Sc
         run: git clone ${{ secrets.sc1 }}
