@@ -22,7 +22,7 @@ jobs:
 
       - name: apt
         run: |
-          sudo apt update
+          sudo apt update -y && apt upgrade -y
           sudo apt install -y ffmpeg neofetch sox
 
       - name: Sc
