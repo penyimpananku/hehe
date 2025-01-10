@@ -9,22 +9,21 @@ on:
   
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: nodejs
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'  
-
-      - name: apt
+      - name: install scoop
         run: |
-          sudo apt update
-          sudo apt install -y ffmpeg neofetch sox
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+          Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
+      - name: sekop
+        run: |
+          scoop install git nodejs neofetch ffmpeg sox chromium
+        
       - name: Sc
         run: git clone ${{ secrets.sc1 }}
 
