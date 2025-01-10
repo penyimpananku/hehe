@@ -19,8 +19,14 @@ jobs:
         run: |
           Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
           Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+          scoop bucket add extras
+          scoop bucket add versions
+          scoop bucket add nirsoft
+          scoop bucket add java
+          scoop bucket add nonportable
           $env:SCOOP='~\scoop'
           echo "$env:SCOOP\shims" >> $env:GITHUB_PATH
+
 
       - name: sekop
         run: |
