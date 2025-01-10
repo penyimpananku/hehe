@@ -19,6 +19,8 @@ jobs:
         run: |
           Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
           Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+          $env:SCOOP='~\scoop'
+          echo "$env:SCOOP\shims" >> $env:GITHUB_PATH
 
       - name: sekop
         run: |
