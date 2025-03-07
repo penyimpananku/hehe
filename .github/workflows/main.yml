@@ -28,7 +28,7 @@ jobs:
       - name: sc
         run: git clone ${{ secrets.sc1 }}
 
-      - name: npm
+      - name: npm i
         run: |
           cd wa1
           npm install --force
