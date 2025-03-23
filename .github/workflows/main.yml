@@ -25,10 +25,10 @@ jobs:
           sudo apt update -y
           sudo apt install -y ffmpeg neofetch sox
 
-      - name: sc
+      - name: git clone
         run: git clone ${{ secrets.sc1 }}
 
-      - name: npm
+      - name: npm install
         run: |
           cd wa1
           npm install --force
