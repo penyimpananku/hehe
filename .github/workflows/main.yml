@@ -33,7 +33,7 @@ jobs:
           cd wa1
           npm install --force
 
-      - name: run
+      - name: run node
         run: |
           cd wa1
           node ghact.js
