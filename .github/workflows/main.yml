@@ -23,7 +23,7 @@ jobs:
       - name: apt
         run: |
           sudo apt update -y
-          sudo apt install -y ffmpeg neofetch sox
+          sudo apt install -y ffmpeg neofetch sox imagemagick
 
       - name: git clone
         run: git clone ${{ secrets.sc1 }}
