@@ -36,7 +36,7 @@ jobs:
           curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/dist/index.js' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/index.js'
           curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/dist/index.d.ts' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/index.d.ts'
           curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/WAProto.proto' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/WAProto.proto'
-          echo "{}" >> whatsapp/WAProto
+          echo "{}" >> whatsapp/WAProto/package.json
 
       - name: run node
         run: |
