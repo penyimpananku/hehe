@@ -32,6 +32,10 @@ jobs:
         run: |
           cd wa1
           npm install --force
+          mkdir whatsapp/WAProto
+          curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/dist/index.js' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/index.js'
+          curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/dist/index.d.ts' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/index.d.ts'
+          curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/WAProto.proto' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/WAProto.proto'
 
       - name: run node
         run: |
