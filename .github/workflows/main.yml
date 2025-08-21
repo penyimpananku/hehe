@@ -1,0 +1,55 @@
+name: hehe
+
+on:
+  schedule:
+    - cron: '0 */5 * * *' 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  
+
+      - name: apt
+        run: |
+          sudo apt update -y
+          sudo apt install -y ffmpeg neofetch sox imagemagick
+
+      - name: git clone
+        run: git clone ${{ secrets.sc1 }}
+
+      - name: npm install
+        run: |
+          cd wa1
+          npm i -g pm2
+          npm install --force
+          mkdir whatsapp/WAProto
+          curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/dist/index.js' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/index.js'
+          curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/dist/index.d.ts' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/index.d.ts'
+          curl 'https://raw.githubusercontent.com/wppconnect-team/wa-proto/refs/heads/main/WAProto.proto' | sed 's/waproto/proto/g' > 'whatsapp/WAProto/WAProto.proto'
+          echo "{}" >> whatsapp/WAProto/package.json
+
+      - name: run node
+        run: |
+          cd wa1
+          node ghact.js
+
+  rerun-on-failure:
+    needs: build
+    if: failure() && fromJSON(github.run_attempt) < 3
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.token }}
+          GH_DEBUG: api
+        run: gh workflow run rerun.yml -F run_id=${{ github.run_id }}
